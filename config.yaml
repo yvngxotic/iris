@@ -1,0 +1,84 @@
+camera:
+  source: 0
+  width: 640
+  height: 480
+  proc_width: 480
+  fourcc: MJPG
+  warmup_frames: 6
+  lock_exposure: false
+  exposure: 120
+  auto_wb: true
+
+vision:
+  mode: auto
+  auto:
+    white_percentile: 80
+    floor_ratio: 0.55
+    blue_margin: 0.035
+  car_hsv:
+    h_min: 85
+    h_max: 140
+    s_min: 70
+    v_min: 45
+    v_max: 255
+  floor:
+    v_min: 110
+    s_max: 60
+    auto: false
+    auto_factor: 0.72
+  min_car_area_px: 120
+  min_obstacle_px: 200
+  obstacle_dilate_px: 5
+
+world:
+  cell_px: 8
+  obstacle_frac: 0.18
+  floor_frac_min: 0.35
+  safety_cells: 1
+
+planner:
+  min_interval_s: 0.7
+  max_expansions: 20000
+  goal: null
+
+control:
+  max_pwm: 175
+  min_pwm: 58
+  lookahead_px: 24
+  heading_gain: 1.35
+  turn_slowdown: 0.6
+  stop_distance_px: 24
+
+serial:
+  enabled: true
+  port: auto
+  baud: 115200
+  invert_left: false
+  invert_right: false
+  watchdog_ms: 600
+  rate_hz: 20
+
+llm:
+  enabled: true
+  base_url: "https://api.commandcode.ai/provider/v1"
+  api_key_env: COMMANDCODE_API_KEY
+  models:
+    balanced: "deepseek/deepseek-v4.1-flash"
+    fast: "deepseek/deepseek-v4.1-flash-fast"
+  use: fast
+  thinking: false
+  temperature: 0.15
+  max_tokens: 220
+  timeout_s: 2.5
+  min_interval_s: 6.0
+  period_s: 12.0
+  on_stuck: true
+  ascii_width: 40
+
+sim:
+  arena_w: 640
+  arena_h: 480
+  car_len: 30
+  car_wid: 18
+  max_speed_px_s: 110.0
+  max_turn_rad_s: 2.6
